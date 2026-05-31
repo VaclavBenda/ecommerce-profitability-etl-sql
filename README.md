@@ -36,6 +36,14 @@ Reporting & Analysis
 
 ---
 
+## 📊 Power BI Dashboard
+
+The Gold layer views were used to build an executive Power BI dashboard for profitability, return, and marketing performance analysis.
+
+<img src="docs/e-commerce-powerbi_dashboard.png" width="1000" alt="Power Bi executive dashboard">
+
+---
+
 ## 📂 Dataset
 
 The project uses three source CSV files:
