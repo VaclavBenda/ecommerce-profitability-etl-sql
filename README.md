@@ -73,13 +73,13 @@ These files contain product details, order transactions, revenue and cost metric
 
 | Script	| Description |
 | :--- | :--- |
-| `init_database.sql` | Creates the database and Bronze, Silver, and Gold schemas. |
-| `ddl_bronze.sql` | Creates Bronze layer tables. |
-| `ddl_silver.sql` | Creates Silver layer tables. |
-| `ddl_gold.sql` | Creates Gold layer analytical views. |
-| `proc_load_bronze.sql` | Loads raw CSV files into Bronze tables using `BULK INSERT`. |
-| `proc_load_silver.sql` | Transforms and loads data from Bronze to Silver. |
-| `quality_checks_silver.sql` | Performs data quality checks on the Silver layer. |
+| `scripts/init_database.sql` | Creates the database and Bronze, Silver, and Gold schemas. |
+| `scripts/bronze/ddl_bronze.sql` | Creates Bronze layer tables. |
+| `scripts/silver/ddl_silver.sql` | Creates Silver layer tables. |
+| `scripts/gold/ddl_gold.sql` | Creates Gold layer analytical views. |
+| `scripts/bronze/proc_load_bronze.sql` | Loads raw CSV files into Bronze tables using `BULK INSERT`. |
+| `scripts/silver/proc_load_silver.sql` | Transforms and loads data from Bronze to Silver. |
+| `test/quality_checks_silver.sql` | Performs data quality checks on the Silver layer. |
 
 ---
 
@@ -143,27 +143,27 @@ The project includes quality checks for:
 
 ## 🚀 How to Run
 
-⚠️ Before running the load procedure, update the CSV file paths in `proc_load_bronze.sql` to match your local machine.
+⚠️ Before running the load procedure, update the CSV file paths in `scripts/bronze/proc_load_bronze.sql` to match your local machine.
 
-1. Run `init_database.sql`
-2. Run `ddl_bronze.sql`
-3. Run `ddl_silver.sql`
-4. Run `proc_load_bronze.sql`
+1. Run `scripts/init_database.sql`
+2. Run `scripts/bronze/ddl_bronze.sql`
+3. Run `scripts/silver/ddl_silver.sql`
+4. Run `scripts/bronze/proc_load_bronze.sql`
 5. Execute the Bronze load procedure:
 
 ```sql
 EXEC bronze.load_bronze;
 ```
 
-6. Run `proc_load_silver.sql`
+6. Run `scripts/silver/proc_load_silver.sql`
 7. Execute the Silver load procedure:
 
 ```sql
 EXEC silver.load_silver;
 ```
 
-8. Run `quality_checks_silver.sql`
-9. Run `ddl_gold.sql`
+8. Run `test/quality_checks_silver.sql`
+9. Run `scripts/gold/ddl_gold.sql`
 
 ---
 
@@ -194,7 +194,7 @@ ORDER BY month_start_date, platform;
 The Gold layer data catalog is documented in:
 
 ```text
-data_catalog.md
+docs/data_catalog.md
 ```
 
 It explains the purpose, source, columns, and business meaning of each Gold view.
@@ -212,8 +212,8 @@ It explains the purpose, source, columns, and business meaning of each Gold view
 
 ## ⚠️ Important Notes
 
-- `init_database.sql` drops and recreates the database if it already exists.
-- `proc_load_bronze.sql` uses local CSV paths that must be updated before running.
+- `scripts/init_database.sql` drops and recreates the database if it already exists.
+- `scripts/bronze/proc_load_bronze.sql` uses local CSV paths that must be updated before running.
 - Gold views do not include `ORDER BY` because SQL Server views do not guarantee row order. Sorting should be done when querying the view.
 
 ---
@@ -233,5 +233,3 @@ This project was created as a portfolio ETL project to demonstrate:
 
 ## 👤 Author
 **Václav Benda**
-
-
